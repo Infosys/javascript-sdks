@@ -58,7 +58,7 @@ export interface UseBrowserUrl {
  */
 const useBrowserUrl = (): UseBrowserUrl => {
   const hasAuthParams = (url: URL, afterSignInUrl: string): boolean =>
-    (hasAuthParamsInUrl() && new URL(url.origin + url.pathname).toString() === new URL(afterSignInUrl).toString()) ||
+    (hasAuthParamsInUrl(url.search) && new URL(url.origin + url.pathname).toString() === new URL(afterSignInUrl).toString()) ||
     // authParams?.authorizationCode || // FIXME: These are sent externally. Need to see what we can do about this.
     url.searchParams.get('error') !== null;
 
