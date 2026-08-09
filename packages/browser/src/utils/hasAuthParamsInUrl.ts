@@ -19,7 +19,9 @@
 /**
  * Utility to check if `code` is available in the URL as a search param.
  *
- * @param params - The URL search params to check. Defaults to `window.location.search`.
+ * @param params - The raw `URL.search` string to check (e.g. `"?code=abc&foo=bar"`). Must include
+ *   the leading `?` or `&` delimiter — do **not** pass a `URLSearchParams.toString()` result, which
+ *   omits the leading `?` and will never match. Defaults to `window.location.search`.
  * @return `true` if the URL contains a `code` search param, otherwise `false`.
  */
 const hasAuthParamsInUrl = (params: string = window.location.search): boolean => {

@@ -51,6 +51,7 @@ export interface UseBrowserUrl {
  * const { hasAuthParams } = useBrowserUrl();
  * const url = new URL(window.location.href);
  *
+ * // afterSignInUrl may be absolute ("https://example.com/after-signin") or relative ("/after-signin")
  * if (hasAuthParams(url, "/after-signin")) {
  *   // Handle authentication callback
  * }
@@ -58,7 +59,7 @@ export interface UseBrowserUrl {
  */
 const useBrowserUrl = (): UseBrowserUrl => {
   const hasAuthParams = (url: URL, afterSignInUrl: string): boolean =>
-    (hasAuthParamsInUrl(url.search) && new URL(url.origin + url.pathname).toString() === new URL(afterSignInUrl).toString()) ||
+    (hasAuthParamsInUrl(url.search) && new URL(url.origin + url.pathname).toString() === new URL(afterSignInUrl, url.origin).toString()) ||
     // authParams?.authorizationCode || // FIXME: These are sent externally. Need to see what we can do about this.
     url.searchParams.get('error') !== null;
 
