@@ -77,7 +77,7 @@ interface ThunderIDProviderProps {
  */
 function hasAuthParams(url: URL, afterSignInUrl: string | undefined): boolean {
   return (
-    (hasAuthParamsInUrl() &&
+    (hasAuthParamsInUrl(url.search) &&
       !!afterSignInUrl &&
       new URL(url.origin + url.pathname).toString() === new URL(afterSignInUrl).toString()) ||
     url.searchParams.get('error') !== null
